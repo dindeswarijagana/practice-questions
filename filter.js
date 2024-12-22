@@ -1,11 +1,32 @@
 // even numbers [1, 2, 3, 4, 5] => [2, 4]
-const filterEvenNumbers = function (numbers) { };
+const filterEvenNumbers = function (numbers) {
+  return numbers.filter(function (number) {
+    return number % 2 === 0;
+  })
+};
+
+console.log(filterEvenNumbers([1, 2, 3, 4, 5]));
+console.log(filterEvenNumbers([1, 3]));
+console.log(filterEvenNumbers([1, 2, 4, 6, 8]));
 
 // words with more than 5 letters ["apple", "banana", "kiwi", "grape"] => ["banana"]
-const filterLongWords = function (words) { };
+const filterLongWords = function (words) {
+  return words.filter(function (word) {
+    return word.length > 5;
+  })
+};
+
+console.log(filterLongWords(["apple", "banana", "kiwi", "grape"]));
 
 // people older than 30 [{name: "Alice", age: 25}, {name: "Bob", age: 35}] => [{name: "Bob", age: 35}]
-const filterAdults = function (people) { };
+const filterAdults = function (people) {
+  return people.filter(function (person) {
+    return person.age > 30;
+  })
+};
+
+console.log(filterAdults([{ name: "Alice", age: 25 }, { name: "Bob", age: 35 }]));
+console.log = function () { }
 
 // active users [{username: "alice", active: true}, {username: "bob", active: false}] => [{username: "alice", active: true}]
 const filterActiveUsers = function (users) { };
@@ -337,3 +358,4 @@ const findInStockItems = function (items, lookup) { };
 // Input: ["Lion", "Elephant", "Shark"], { "Lion": { habitat: "Jungle" }, "Elephant": { habitat: "Jungle" }, "Shark": { habitat: "Ocean" } } , "Jungle"
 // Output: ["Lion", "Elephant"]
 const findAnimalsByHabitat = function (animals, lookup) { };
+

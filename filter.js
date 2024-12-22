@@ -80,28 +80,104 @@ const filterInStockProducts = function (products) {
 };
 
 console.log(filterInStockProducts([{ product: "apple", inStock: true }, { product: "banana", inStock: false }]));
-console.log = function () { }
 
 // orders placed in the last 30 days [{orderDate: "2024-11-01"}, {orderDate: "2024-12-01"}] => [{orderDate: "2024-12-01"}]
-const filterRecentOrders = function (orders) { };
+const filterRecentOrders = function (orders) {
+  return orders.filter(function (order) {
+    const [year, month, day] = (order.orderDate.split("-"));
+    return +year === 2024 && (+month === 11 && +day > 21 && +day < 31) || (+month === 12 && +day > 0 && +day < 23);
+  })
+};
+
+console.log(filterRecentOrders([{ orderDate: "2024-11-01" }, { orderDate: "2024-12-01" }]));
 
 // products with a price lower than the average [{name: "item1", price: 10}, {name: "item2", price: 20}, {name: "item3", price: 5}] => [{name: "item1", price: 10}, {name: "item3", price: 5}]
-const filterBelowAveragePrice = function (products) { };
+
+const getProductPrice = function (total, product) {
+  return total + product.price;
+}
+
+const filterBelowAveragePrice = function (products) {
+  const totalPrice = products.reduce(getProductPrice, 0);
+  const averagePrice = Math.ceil(totalPrice / products.length);
+
+  return products.filter(function (product) {
+    return product.price < averagePrice;
+  })
+};
+
+console.log(filterBelowAveragePrice([{ name: "item1", price: 10 }, { name: "item2", price: 20 }, { name: "item3", price: 5 }]))
 
 // active users who posted in the last 7 days [{username: "alice", lastPostDate: "2024-12-01", active: true}, {username: "bob", lastPostDate: "2024-11-20", active: true}] => [{username: "alice", lastPostDate: "2024-12-01", active: true}]
-const filterRecentActiveUsers = function (users) { };
+
+const getActiveUsers = function (user) {
+  return user.active === true;
+}
+
+const filterRecentActiveUsers = function (users) {
+  const activeUsers = filterActiveUsers(users);
+  return activeUsers.filter(function (activeUser) {
+    const [year, month, day] = activeUser.lastPostDate.split("-");
+    return (+year === 2024 && +month === 12 && (+day < 23 && +day > 15));
+  })
+}
+
+console.log(filterRecentActiveUsers([{ username: "alice", lastPostDate: "2024-12-20", active: true }, { username: "bob", lastPostDate: "2024-11-20", active: true }]));
 
 // students who passed all subjects [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}, {name: "Jane", subjects: [{name: "Math", passed: false}, {name: "Science", passed: true}]}] => [{name: "John", subjects: [{name: "Math", passed: true}, {name: "Science", passed: true}]}]
-const filterStudentsWithAllSubjectsPassed = function (students) { };
+
+const filterStudentsWithAllSubjectsPassed = function (students) {
+  return students.filter(function (student) {
+    return student.subjects.every(function (subject) {
+      return subject.passed === true;
+    })
+  })
+};
+
+console.log(filterStudentsWithAllSubjectsPassed([{ name: "John", subjects: [{ name: "Math", passed: true }, { name: "Science", passed: true }] }, { name: "Jane", subjects: [{ name: "Math", passed: false }, { name: "Science", passed: true }] }]));
 
 // people whose birthday is this month [{name: "Alice", birthDate: "2024-12-01"}, {name: "Bob", birthDate: "2024-11-01"}] => [{name: "Alice", birthDate: "2024-12-01"}]
-const filterBirthdaysThisMonth = function (people) { };
+const filterBirthdaysThisMonth = function (people) {
+  return people.filter(function (person) {
+    const [year, month, day] = person.birthDate.split("-");
+    return +month === 12;
+  })
+};
 
+console.log(filterBirthdaysThisMonth([{ name: "Alice", birthDate: "2024-12-01" }, { name: "Bob", birthDate: "2024-11-01" }]));
 // orders that exceed the average order value [{orderId: 1, amount: 20}, {orderId: 2, amount: 50}, {orderId: 3, amount: 10}] => [{orderId: 2, amount: 50}]
-const filterHighValueOrders = function (orders) { };
+
+const getTotalAmount = function (total, order) {
+  return order.amount + total;
+}
+
+const filterHighValueOrders = function (orders) {
+  const totalAmount = orders.reduce(getTotalAmount, 0);
+  const averageAmount = totalAmount / orders.length;
+  return orders.filter(function (order) {
+    return order.amount > averageAmount;
+  })
+};
+
+console.log(filterHighValueOrders([{ orderId: 1, amount: 20 }, { orderId: 2, amount: 50 }, { orderId: 3, amount: 10 }]));
 
 // books with reviews higher than the average rating [{title: "Book 1", rating: 4}, {title: "Book 2", rating: 5}, {title: "Book 3", rating: 3}] => [{title: "Book 2", rating: 5}]
-const filterTopRatedBooks = function (books) { };
+
+const getTotalRating = function (total, book) {
+  return book.amount + total;
+}
+
+const filterTopRatedBooks = function (books) {
+  const totalRating = books.reduce(getTotalRating, 0);
+  const averageRating = totalRating / books.length;
+
+  return books.filter(function (book) {
+    return book.amount > averageRating;
+  })
+};
+
+console.log(filterTopRatedBooks([{ title: "Book 1", rating: 4 }, { title: "Book 2", rating: 5 }, { title: "Book 3", rating: 3 }]));
+console.log = function () { }
 
 // employees whose salary is higher than the department average [{name: "Alice", salary: 5000, department: "HR"}, {name: "Bob", salary: 7000, department: "HR"}, {name: "Charlie", salary: 4000, department: "IT"}] => [{name: "Bob", salary: 7000, department: "HR"}]
 const filterHighSalaryEmployees = function (employees) { };

@@ -44,20 +44,43 @@ const filterNumbersGreaterThanTen = function (numbers) {
 };
 
 console.log(filterNumbersGreaterThanTen([5, 12, 7, 18, 3]));
-console.log = function () { }
 
 // books with more than 200 pages [{title: "Book 1", pages: 150}, {title: "Book 2", pages: 250}] => [{title: "Book 2", pages: 250}]
 const filterLongBooks = function (books) {
+  return books.filter(function (book) {
+    return book.pages > 200;
+  })
 };
 
+console.log(filterLongBooks([{ title: "Book 1", pages: 150 }, { title: "Book 2", pages: 250 }]));
+
 // users with incomplete profiles [{username: "alice", profileComplete: true}, {username: "bob", profileComplete: false}] => [{username: "bob", profileComplete: false}]
-const filterIncompleteProfiles = function (users) { };
+const filterIncompleteProfiles = function (users) {
+  return users.filter(function (user) {
+    return user.profileComplete === false;
+  })
+};
+
+console.log(filterIncompleteProfiles([{ username: "alice", profileComplete: true }, { username: "bob", profileComplete: false }]));
 
 // students with grades above 80 [{name: "John", grade: 75}, {name: "Jane", grade: 85}] => [{name: "Jane", grade: 85}]
-const filterHighGrades = function (students) { };
+const filterHighGrades = function (students) {
+  return students.filter(function (student) {
+    return student.grade > 80;
+  })
+};
+
+console.log(filterHighGrades([{ name: "John", grade: 75 }, { name: "Jane", grade: 85 }]))
 
 // products that are in stock [{product: "apple", inStock: true}, {product: "banana", inStock: false}] => [{product: "apple", inStock: true}]
-const filterInStockProducts = function (products) { };
+const filterInStockProducts = function (products) {
+  return products.filter(function (product) {
+    return product.inStock === true;
+  })
+};
+
+console.log(filterInStockProducts([{ product: "apple", inStock: true }, { product: "banana", inStock: false }]));
+console.log = function () { }
 
 // orders placed in the last 30 days [{orderDate: "2024-11-01"}, {orderDate: "2024-12-01"}] => [{orderDate: "2024-12-01"}]
 const filterRecentOrders = function (orders) { };

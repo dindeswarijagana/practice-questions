@@ -148,13 +148,38 @@ const joinWordsWithSpace = function (words) {
 }
 
 console.log(joinWordsWithSpace(["apple", "banana", "cherry"]));
-console.log = function () { }
 
 // concatenateNames(["John", "Jane", "Doe"]) => "JohnJaneDoe"
-const concatenateNames = function (names) { }
+const concatenateNames = function (names) {
+  return names.reduce(function (init, name) {
+    return init + name;
+  });
+}
+
+console.log(concatenateNames(["John", "Jane", "Doe"]));
 
 // countVowelsInWords(["hello", "world"]) => "eoo"
-const countVowelsInWords = function (words) { }
+
+const getVowels = function (init, char) {
+  const vowels = "aeiou";
+
+  if (vowels.includes(char.toLowerCase())) {
+    return init + char;
+  }
+
+  return init;
+}
+
+const countVowelsInWords = function (words) {
+  return words.reduce(function (init, word) {
+    const vowelsInWords = word.split("").reduce(getVowels, "");
+    return init + vowelsInWords;
+  }, "");
+}
+
+console.log(countVowelsInWords(["hello", "world"]));
+console.log(countVowelsInWords(["hevou", "world"]));
+console.log = function () { }
 
 // makeCamelCase(["hello", "world", "how", "are", "you"]) => "helloWorldHowAreYou"
 const makeCamelCase = function (words) { }

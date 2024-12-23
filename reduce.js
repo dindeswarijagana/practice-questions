@@ -1,50 +1,154 @@
 // sumOf([1, 2, 3, 4]) => 10
-const sumOf = function (numbers) { }
+const sumOf = function (numbers) {
+  return numbers.reduce(function (number, sum) {
+    return number + sum;
+  }, 0);
+}
+
+console.log(sumOf([1, 2, 3, 4]));
 
 // productOf([1, 2, 3, 4]) => 24
-const productOf = function (numbers) { }
+const productOf = function (numbers) {
+  return numbers.reduce(function (number, product) {
+    return number * product;
+  }, 1);
+}
+
+console.log(productOf([1, 2, 3, 4]))
 
 // averageOf([1, 2, 3, 4, 5]) => 3
-const averageOf = function (numbers) { }
+const averageOf = function (numbers) {
+  const sum = sumOf(numbers);
+  return Math.ceil(sum / numbers.length);
+}
+
+console.log(averageOf([1, 2, 3, 4, 5]));
 
 // minOf([3, 1, 4, 1, 5, 9, 2]) => 1
-const minOf = function (numbers) { }
+const minOf = function (numbers) {
+  return numbers.reduce(function (min, number) {
+    return number < min ? number : min;
+  }, numbers[0]);
+}
+
+console.log(minOf([3, 1, 4, 1, 5, 9, 2]));
 
 // maxOf([3, 1, 4, 1, 5, 9, 2]) => 9
-const maxOf = function (numbers) { }
+const maxOf = function (numbers) {
+  return numbers.reduce(function (max, number) {
+    return number > max ? number : max;
+  }, numbers[0]);
+}
+
+console.log(maxOf([3, 1, 4, 1, 5, 9, 2]));
 
 // sumPositiveNumbers([1, -2, 3, -4]) => 4
-const sumPositiveNumbers = function (numbers) { }
+const sumPositiveNumbers = function (numbers) {
+  const positiveNumbers = numbers.filter(function (number) {
+    return number > 0;
+  });
+  return sumOf(positiveNumbers);
+}
+
+console.log(sumPositiveNumbers([1, -2, 3, -4]));
 
 // sumOfSquares([1, 2, 3, 4]) => 30
-const sumOfSquares = function (numbers) { }
+const sumOfSquares = function (numbers) {
+  const squares = numbers.map(function (number) {
+    return Math.pow(number, 2);
+  });
+  return sumOf(squares)
+}
+
+console.log(sumOfSquares([1, 2, 3, 4]));
 
 // sumOfOddNumbers([1, 2, 3, 4, 5]) => 9
-const sumOfOddNumbers = function (numbers) { }
+const sumOfOddNumbers = function (numbers) {
+  const oddNumbers = numbers.filter(function (number) {
+    return number % 2 !== 0;
+  });
+  return sumOf(oddNumbers)
+}
+
+console.log(sumOfOddNumbers([1, 2, 3, 4, 5]));
 
 // countNegativeNumbers([1, -2, 3, -4]) => 2
-const countNegativeNumbers = function (numbers) { }
+
+const countNegativeNumbers = function (numbers) {
+  return numbers.reduce(function (count, number) {
+    count += number < 0 ? 1 : 0;
+    return count;
+  }, 0);
+}
+
+console.log(countNegativeNumbers([1, -2, 3, -4]));
 
 // findSumOfEvenSquares([1, 2, 3, 4]) => 20
-const findSumOfEvenSquares = function (numbers) { }
+const findSumOfEvenSquares = function (numbers) {
+  const evenNumbers = numbers.filter(function (number) {
+    return number % 2 === 0;
+  });
+
+  return sumOfSquares(evenNumbers);
+}
+
+console.log(findSumOfEvenSquares([1, 2, 3, 4]));
 
 // concatenateWords(["hello", "world"]) => "helloworld"
-const concatenateWords = function (words) { }
+const concatenateWords = function (words) {
+  return words.reduce(function (init, word) {
+    return init + word;
+  }, '');
+}
+
+console.log(concatenateWords(["hello", "world"]));
 
 // longestWord(["apple", "banana", "cherry", "kiwi"]) => "banana"
-const longestWord = function (words) { }
+
+const longestWord = function (words) {
+  return words.reduce(function (largerWord, word) {
+    return largerWord.length >= word.length ? largerWord : word;
+  }, "");
+}
+
+console.log(longestWord(["apple", "banana", "cherry", "kiwi"]));
 
 // shortestWord(["apple", "banana", "cherry", "kiwi"]) => "kiwi"
-const shortestWord = function (words) { }
+const shortestWord = function (words) {
+  return words.reduce(function (smallerWord, word) {
+    return smallerWord.length < word.length ? smallerWord : word;
+  });
+}
+
+console.log(shortestWord(["apple", "banana", "cherry", "kiwi"]));
 
 // joinWithComma(["apple", "banana", "cherry"]) => "apple,banana,cherry"
-const joinWithComma = function (words) { }
+const joinWithComma = function (words) {
+  return words.reduce(function (init, word) {
+    return init + "," + word;
+  });
+}
+
+console.log(joinWithComma(["apple", "banana", "cherry", "kiwi"]));
 
 // reverseWords(["hello", "world"]) => "world hello"
-const reverseWords = function (words) { }
+const reverseWords = function (words) {
+  return words.reduce(function (init, word) {
+    return word + " " + init;
+  }, "");
+}
+
+console.log(reverseWords(["hello", "world", "hi"]));
 
 // joinWordsWithSpace(["apple", "banana", "cherry"]) => "apple banana cherry"
-const joinWordsWithSpace = function (words) { }
+const joinWordsWithSpace = function (words) {
+  return words.reduce(function (init, word) {
+    return init + " " + word;
+  });
+}
+
+console.log(joinWordsWithSpace(["apple", "banana", "cherry"]));
+console.log = function () { }
 
 // concatenateNames(["John", "Jane", "Doe"]) => "JohnJaneDoe"
 const concatenateNames = function (names) { }
